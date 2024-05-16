@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.devzery</groupId>
+	<artifactId>logging</artifactId>
+	<version>${revision}-Javax</version>
+	<packaging>jar</packaging>
+	<name>Logging</name>
+	<description>API request and response logging</description>
+	<url>https://github.com/devzery-services/springboot_logging</url>
+  	<organization>
+      <name>Devzery</name>
+  	</organization>
+  	<properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+      <java.version>17</java.version>
+      <maven.compiler.source>17</maven.compiler.source>
+      <maven.compiler.target>17</maven.compiler.target>
+      <logbook.version>3.8.0</logbook.version>
+      <spring-boot.version>2.7.0</spring-boot.version>
+  	</properties>
+
+	<dependencies>
+
+    	<dependency>
+        	<groupId>org.zalando</groupId>
+        	<artifactId>logbook-spring-boot-starter</artifactId>
+        	<version>${logbook.version}</version>
+      	</dependency>
+
+		<dependency>
+            <groupId>org.zalando</groupId>
+            <artifactId>logbook-servlet</artifactId>
+            <version>${logbook.version}</version>
+            <classifier>javax</classifier>
+        </dependency>
+
+		<dependency> 
+         	<groupId>org.springframework.boot</groupId> 
+            <artifactId>spring-boot-starter-web</artifactId>
+			<version>${spring-boot.version}</version>
+			<scope>provided</scope>
+        </dependency>
+
+		<dependency>
+        	<groupId>org.asynchttpclient</groupId>
+        	<artifactId>async-http-client</artifactId>
+        	<version>2.12.3</version>
+    	</dependency>
+		
+	</dependencies>
+
+	<dependencyManagement>
+    	<dependencies>
+        	<dependency>
+            	<groupId>org.asynchttpclient</groupId>
+            	<artifactId>async-http-client</artifactId>
+            	<version>2.12.3</version>
+        	</dependency>
+			<dependency> 
+         		<groupId>org.springframework.boot</groupId> 
+            	<artifactId>spring-boot-starter-web</artifactId>
+				<version>${spring-boot.version}</version>
+        	</dependency>
+    	</dependencies>
+	</dependencyManagement>
+	
+	<distributionManagement>
+		<repository>
+			<id>com.devzery</id>
+			<name>logging</name>
+			<url>https://maven.pkg.github.com/devzery-services/springboot_logging</url>
+		</repository>
+	</distributionManagement>
+
+	<build>
+      	<finalName>${project.artifactId}-${project.version}</finalName>
+      	<plugins>
+          	<!-- Compiler -->
+          	<plugin>
+            	<groupId>org.apache.maven.plugins</groupId>
+              	<artifactId>maven-compiler-plugin</artifactId>
+              	<version>3.13.0</version>
+              	<configuration>
+                  	<source>${maven.compiler.source}</source>
+                  	<target>${maven.compiler.target}</target>
+              	</configuration>
+          	</plugin>
+          	<!-- Jar -->
+          	<plugin>
+              	<groupId>org.apache.maven.plugins</groupId>
+              	<artifactId>maven-jar-plugin</artifactId>
+              	<version>3.4.1</version>
+          	</plugin>
+      	</plugins>
+  	</build> 
+
+</project>
