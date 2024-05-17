@@ -1,4 +1,4 @@
-package com.devzery.logging;
+package com.devzery.middleware;
 
 import org.zalando.logbook.*;
 import org.zalando.logbook.json.JsonHttpLogFormatter;

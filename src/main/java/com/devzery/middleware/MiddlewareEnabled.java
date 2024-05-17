@@ -1,4 +1,4 @@
-package com.devzery.logging;
+package com.devzery.middleware;
 
 import java.lang.annotation.*;
 import org.springframework.context.annotation.Import;
@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Component
-@Import(LoggingImportSelector.class)
-public @interface LoggingEnabled {
+@Import(MiddlewareImportSelector.class)
+public @interface MiddlewareEnabled {
     String apiKey() default "";
     String sourceName() default "";
 }

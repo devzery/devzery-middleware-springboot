@@ -3,12 +3,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.devzery</groupId>
-	<artifactId>logging</artifactId>
+	<artifactId>middleware</artifactId>
 	<version>${revision}-Javax</version>
 	<packaging>jar</packaging>
-	<name>Logging</name>
-	<description>API request and response logging</description>
-	<url>https://github.com/devzery-services/springboot_logging</url>
+	<name>Devzery-Middleware-Springboot</name>
+	<description>Spring Boot library for API monitoring</description>
+	<url>https://github.com/devzery/devzery-middleware-springboot</url>
   	<organization>
       <name>Devzery</name>
   	</organization>
@@ -70,8 +70,8 @@
 	<distributionManagement>
 		<repository>
 			<id>com.devzery</id>
-			<name>logging</name>
-			<url>https://maven.pkg.github.com/devzery-services/springboot_logging</url>
+			<name>middleware</name>
+			<url>https://maven.pkg.github.com/devzery/devzery-middleware-springboot</url>
 		</repository>
 	</distributionManagement>
 

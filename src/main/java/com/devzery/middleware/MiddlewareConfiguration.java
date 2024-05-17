@@ -1,4 +1,4 @@
-package com.devzery.logging;
+package com.devzery.middleware;
 
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -15,7 +15,7 @@ import static org.zalando.logbook.core.Conditions.requestTo;
 
 @Configuration
 @ImportAutoConfiguration(classes = LogbookAutoConfiguration.class)
-public class LoggingConfiguration implements ImportAware {
+public class MiddlewareConfiguration implements ImportAware {
 
     private String apiKey;
     private String sourceName;
@@ -23,7 +23,7 @@ public class LoggingConfiguration implements ImportAware {
     @Override
     public void setImportMetadata(AnnotationMetadata importMetadata) {
         AnnotationAttributes attributes = AnnotationAttributes.fromMap(
-                importMetadata.getAnnotationAttributes(LoggingEnabled.class.getName()));
+                importMetadata.getAnnotationAttributes(MiddlewareEnabled.class.getName()));
         if (attributes != null) {
             this.apiKey = attributes.getString("apiKey");
             this.sourceName = attributes.getString("sourceName");
@@ -31,7 +31,7 @@ public class LoggingConfiguration implements ImportAware {
     }
 
     @Bean
-    public FlaskApiProperties flaskApiProperties() {
+    FlaskApiProperties flaskApiProperties() {
         FlaskApiProperties flaskApiProperties = new FlaskApiProperties();
         flaskApiProperties.setApiKey(apiKey);
         flaskApiProperties.setSourceName(sourceName);

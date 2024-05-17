@@ -1,4 +1,4 @@
-package com.devzery.logging;
+package com.devzery.middleware;
 
 
 final class FlaskApiProperties {

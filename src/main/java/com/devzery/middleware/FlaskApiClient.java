@@ -1,4 +1,4 @@
-package com.devzery.logging;
+package com.devzery.middleware;
 
 import org.asynchttpclient.AsyncHttpClient;
 import org.asynchttpclient.DefaultAsyncHttpClient;
