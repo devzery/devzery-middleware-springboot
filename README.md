@@ -46,7 +46,7 @@ mvn clean deploy -Drevision='1.0.0' -f pom.xml
        **`import com.devzery.middleware.MiddlewareEnabled;`**
 
        @SpringBootApplication
-       @MiddlewareEnabled(apiKey = "YOUR_API_KEY", sourceName = "YOUR_SOURCE_URL")
+       @MiddlewareEnabled(apiKey = "YOUR_API_KEY", serverName = "YOUR_SERVER_URL")
        public class AppApplication {
 	        public static void main(String[] args) {
 		      SpringApplication.run(AppApplication.class, args);

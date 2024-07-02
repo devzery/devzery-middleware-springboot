@@ -18,7 +18,7 @@ import static org.zalando.logbook.core.Conditions.requestTo;
 public class MiddlewareConfiguration implements ImportAware {
 
     private String apiKey;
-    private String sourceName;
+    private String serverName;
 
     @Override
     public void setImportMetadata(AnnotationMetadata importMetadata) {
@@ -26,7 +26,7 @@ public class MiddlewareConfiguration implements ImportAware {
                 importMetadata.getAnnotationAttributes(MiddlewareEnabled.class.getName()));
         if (attributes != null) {
             this.apiKey = attributes.getString("apiKey");
-            this.sourceName = attributes.getString("sourceName");
+            this.serverName = attributes.getString("serverName");
         }        
     }
 
@@ -34,7 +34,7 @@ public class MiddlewareConfiguration implements ImportAware {
     FlaskApiProperties flaskApiProperties() {
         FlaskApiProperties flaskApiProperties = new FlaskApiProperties();
         flaskApiProperties.setApiKey(apiKey);
-        flaskApiProperties.setSourceName(sourceName);
+        flaskApiProperties.setSourceName(serverName);
         return flaskApiProperties;
     }
 

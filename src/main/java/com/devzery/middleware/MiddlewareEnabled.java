@@ -11,5 +11,5 @@ import org.springframework.stereotype.Component;
 @Import(MiddlewareImportSelector.class)
 public @interface MiddlewareEnabled {
     String apiKey() default "";
-    String sourceName() default "";
+    String serverName() default "";
 }
