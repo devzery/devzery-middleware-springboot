@@ -43,6 +43,35 @@ final class FlaskApiClient implements HttpLogWriter {
         // Send the payload to the Flask API
         sendToFlaskAPIAsync();
     }
+    
+    /**
+     * Direct method to log request/response data from our adapter-based filter
+     */
+    public void logRequest(String method, String path, String userAgent, int statusCode, long durationMillis) {
+        try {
+            Map<String, Object> payload = new HashMap<>();
+            
+            // Build request data
+            Map<String, Object> requestData = new HashMap<>();
+            requestData.put("method", method);
+            requestData.put("path", path);
+            requestData.put("user_agent", userAgent);
+            payload.put("request", requestData);
+            
+            // Build response data
+            Map<String, Object> responseData = new HashMap<>();
+            responseData.put("status_code", statusCode);
+            payload.put("response", responseData);
+            
+            // Add duration
+            payload.put("elapsed_time", durationMillis);
+            
+            // Send to API
+            sendPayloadToFlaskAPI(payload);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     private void constructRequestPayload(String request) throws IOException {
         payload.put("request", parseJsonToMap(request));
@@ -54,6 +83,10 @@ final class FlaskApiClient implements HttpLogWriter {
     }
 
     private void sendToFlaskAPIAsync() throws IOException {
+        sendPayloadToFlaskAPI(payload);
+    }
+    
+    private void sendPayloadToFlaskAPI(Map<String, Object> payload) throws IOException {
         RequestBuilder requestBuilder = new RequestBuilder()
                 .setUrl(flaskApiProperties.getUrl())
                 .setMethod("POST")
@@ -73,10 +106,7 @@ final class FlaskApiClient implements HttpLogWriter {
                 Response response = future.get();
 
                 // Handle the response
-                if (response.getStatusCode() == 200) {
-                    System.out.println("Request successful!");
-                    System.out.println("Response body: " + response.getResponseBody());
-                } else {
+                if (response.getStatusCode() != 200) {
                     System.err.println("Request failed with status code: " + response.getStatusCode());
                 }
             } catch (Exception e) {

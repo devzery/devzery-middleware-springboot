@@ -15,9 +15,9 @@
   	<properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
       <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-      <java.version>17</java.version>
-      <maven.compiler.source>17</maven.compiler.source>
-      <maven.compiler.target>17</maven.compiler.target>
+      <java.version>11</java.version>
+      <maven.compiler.source>11</maven.compiler.source>
+      <maven.compiler.target>11</maven.compiler.target>
       <logbook.version>3.8.0</logbook.version>
       <spring-boot.version>2.7.0</spring-boot.version>
   	</properties>
@@ -49,6 +49,30 @@
         	<artifactId>async-http-client</artifactId>
         	<version>2.12.3</version>
     	</dependency>
+
+		<!-- Core Spring Boot dependencies -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+			<version>${spring-boot.version}</version>
+		</dependency>
+		
+		<!-- Optional - only needed at compile time -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>4.0.1</version>
+			<scope>provided</scope>
+			<optional>true</optional>
+		</dependency>
+		
+		<dependency>
+			<groupId>jakarta.servlet</groupId>
+			<artifactId>jakarta.servlet-api</artifactId>
+			<version>5.0.0</version>
+			<scope>provided</scope>
+			<optional>true</optional>
+		</dependency>
 		
 	</dependencies>
 
@@ -96,5 +120,48 @@
           	</plugin>
       	</plugins>
   	</build> 
+
+	<profiles>
+		<profile>
+			<id>javax</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+				<property>
+					<name>servlet.spec</name>
+					<value>javax</value>
+				</property>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>org.zalando</groupId>
+					<artifactId>logbook-servlet</artifactId>
+					<version>${logbook.version}</version>
+					<classifier>javax</classifier>
+				</dependency>
+			</dependencies>
+			<properties>
+				<servlet.suffix>-Javax</servlet.suffix>
+			</properties>
+		</profile>
+		<profile>
+			<id>jakarta</id>
+			<activation>
+				<property>
+					<name>servlet.spec</name>
+					<value>jakarta</value>
+				</property>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>org.zalando</groupId>
+					<artifactId>logbook-servlet</artifactId>
+					<version>${logbook.version}</version>
+				</dependency>
+			</dependencies>
+			<properties>
+				<servlet.suffix>-Jakarta</servlet.suffix>
+			</properties>
+		</profile>
+	</profiles>
 
 </project>

@@ -1,6 +1,7 @@
 package com.devzery.middleware;
 
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportAware;
@@ -37,6 +38,21 @@ public class MiddlewareConfiguration implements ImportAware {
         flaskApiProperties.setSourceName(serverName);
         return flaskApiProperties;
     }
+    
+    @Bean
+    FlaskApiClient flaskApiClient() {
+        return new FlaskApiClient(flaskApiProperties());
+    }
+    
+    @Bean
+    public FilterRegistrationBean<MiddlewareFilter> middlewareFilterRegistration() {
+        FilterRegistrationBean<MiddlewareFilter> registration = new FilterRegistrationBean<>();
+        registration.setFilter(new MiddlewareFilter(flaskApiClient()));
+        registration.addUrlPatterns("/*");
+        registration.setName("middlewareFilter");
+        registration.setOrder(1);
+        return registration;
+    }
 
     @Bean
     Logbook logbook(){
@@ -47,7 +63,7 @@ public class MiddlewareConfiguration implements ImportAware {
                 ))
                 .sink(new DefaultSink(
                         new PrincipalHttpLogFormatter(new JsonHttpLogFormatter()),
-                        new FlaskApiClient(flaskApiProperties())
+                        flaskApiClient()
                 ))
                 .build();
     }
