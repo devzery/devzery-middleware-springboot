@@ -39,6 +39,9 @@ final class PrincipalHttpLogFormatter implements HttpLogFormatter {
     @Override
     public String format(Correlation correlation, HttpResponse response) throws IOException {
         final Map<String, Object> content = delegate.prepare(correlation, response);
+
+        Object bodyContent = content.get("body");
+        
         content.remove("origin");
         content.remove("type");
         content.remove("correlation");
@@ -48,7 +51,7 @@ final class PrincipalHttpLogFormatter implements HttpLogFormatter {
         content.remove("headers");
         content.remove("body");
         content.put("status_code", response.getStatus());
-        content.put("content", content.get("body"));
+        content.put("content", bodyContent);
         return delegate.format(content);
     }
 }
