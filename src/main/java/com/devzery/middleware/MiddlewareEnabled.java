@@ -12,4 +12,5 @@ import org.springframework.stereotype.Component;
 public @interface MiddlewareEnabled {
     String apiKey() default "";
     String serverName() default "";
+    String apiUrl() default "https://server-v3-7qxc7hlaka-uc.a.run.app/api/add";
 }
