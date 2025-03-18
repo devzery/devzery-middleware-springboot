@@ -19,6 +19,7 @@ public class MiddlewareConfiguration implements ImportAware {
 
     private String apiKey;
     private String serverName;
+    private String apiUrl;
 
     @Override
     public void setImportMetadata(AnnotationMetadata importMetadata) {
@@ -27,6 +28,7 @@ public class MiddlewareConfiguration implements ImportAware {
         if (attributes != null) {
             this.apiKey = attributes.getString("apiKey");
             this.serverName = attributes.getString("serverName");
+            this.apiUrl = attributes.getString("apiUrl");
         }        
     }
 
@@ -35,6 +37,7 @@ public class MiddlewareConfiguration implements ImportAware {
         FlaskApiProperties flaskApiProperties = new FlaskApiProperties();
         flaskApiProperties.setApiKey(apiKey);
         flaskApiProperties.setSourceName(serverName);
+        flaskApiProperties.setApiUrl(apiUrl);
         return flaskApiProperties;
     }
 
