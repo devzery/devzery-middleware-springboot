@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.devzery</groupId>
@@ -9,64 +11,42 @@
 	<name>Devzery-Middleware-Springboot</name>
 	<description>Spring Boot library for API monitoring</description>
 	<url>https://github.com/devzery/devzery-middleware-springboot</url>
-  	<organization>
-      <name>Devzery</name>
-  	</organization>
-  	<properties>
-      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-      <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-      <java.version>17</java.version>
-      <maven.compiler.source>8</maven.compiler.source>
-      <maven.compiler.target>8</maven.compiler.target>
-      <logbook.version>3.8.0</logbook.version>
-      <spring-boot.version>2.7.0</spring-boot.version>
-  	</properties>
-
+	<organization>
+		<name>Devzery</name>
+	</organization>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>17</java.version>
+		<maven.compiler.source>8</maven.compiler.source>
+		<maven.compiler.target>8</maven.compiler.target>
+		<logbook.version>3.8.0</logbook.version>
+		<spring-boot.version>2.7.0</spring-boot.version>
+	</properties>
 	<dependencies>
-
-    	<dependency>
-        	<groupId>org.zalando</groupId>
-        	<artifactId>logbook-spring-boot-starter</artifactId>
-        	<version>${logbook.version}</version>
-      	</dependency>
-
 		<dependency>
-            <groupId>org.zalando</groupId>
-            <artifactId>logbook-servlet</artifactId>
-            <version>${logbook.version}</version>
-            <classifier>javax</classifier>
-        </dependency>
-
-		<dependency> 
-         	<groupId>org.springframework.boot</groupId> 
-            <artifactId>spring-boot-starter-web</artifactId>
+			<groupId>org.zalando</groupId>
+			<artifactId>logbook-spring-boot-starter</artifactId>
+			<version>${logbook.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.zalando</groupId>
+			<artifactId>logbook-servlet</artifactId>
+			<version>${logbook.version}</version>
+			<classifier>javax</classifier>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
 			<version>${spring-boot.version}</version>
 			<scope>provided</scope>
-        </dependency>
-
+		</dependency>
 		<dependency>
-        	<groupId>org.asynchttpclient</groupId>
-        	<artifactId>async-http-client</artifactId>
-        	<version>2.12.3</version>
-    	</dependency>
-		
+			<groupId>org.asynchttpclient</groupId>
+			<artifactId>async-http-client</artifactId>
+			<version>2.12.3</version>
+		</dependency>
 	</dependencies>
-
-	<dependencyManagement>
-    	<dependencies>
-        	<dependency>
-            	<groupId>org.asynchttpclient</groupId>
-            	<artifactId>async-http-client</artifactId>
-            	<version>2.12.3</version>
-        	</dependency>
-			<dependency> 
-         		<groupId>org.springframework.boot</groupId> 
-            	<artifactId>spring-boot-starter-web</artifactId>
-				<version>${spring-boot.version}</version>
-        	</dependency>
-    	</dependencies>
-	</dependencyManagement>
-	
 	<distributionManagement>
 		<repository>
 			<id>com.devzery</id>
@@ -74,35 +54,32 @@
 			<url>https://maven.pkg.github.com/devzery/devzery-middleware-springboot</url>
 		</repository>
 	</distributionManagement>
-
 	<build>
-      	<finalName>${project.artifactId}-${project.version}</finalName>
-      	<plugins>
-		<!-- Versions Maven Plugin -->
-		<!-- https://mvnrepository.com/artifact/org.codehaus.mojo/versions-maven-plugin -->
-		<plugin>
-	            <groupId>org.codehaus.mojo</groupId>
-	            <artifactId>versions-maven-plugin</artifactId>
-	            <version>2.7</version>
-	        </plugin>
-
-          	<!-- Compiler -->
-          	<plugin>
-            	<groupId>org.apache.maven.plugins</groupId>
-              	<artifactId>maven-compiler-plugin</artifactId>
-              	<version>3.13.0</version>
-              	<configuration>
-                  	<source>${maven.compiler.source}</source>
-                  	<target>${maven.compiler.target}</target>
-              	</configuration>
-          	</plugin>
-          	<!-- Jar -->
-          	<plugin>
-              	<groupId>org.apache.maven.plugins</groupId>
-              	<artifactId>maven-jar-plugin</artifactId>
-              	<version>3.4.1</version>
-          	</plugin>
-      	</plugins>
-  	</build> 
-
+		<finalName>${project.artifactId}-${project.version}</finalName>
+		<plugins>
+			<!-- Versions Maven Plugin -->
+			<!-- https://mvnrepository.com/artifact/org.codehaus.mojo/versions-maven-plugin -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+				<version>2.7</version>
+			</plugin>
+			<!-- Compiler -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.13.0</version>
+				<configuration>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+				</configuration>
+			</plugin>
+			<!-- Jar -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.4.1</version>
+			</plugin>
+		</plugins>
+	</build>
 </project>
