@@ -55,7 +55,7 @@ final class FlaskApiClient implements HttpLogWriter {
 
     private void sendToFlaskAPIAsync() throws IOException {
         RequestBuilder requestBuilder = new RequestBuilder()
-                .setUrl(flaskApiProperties.getUrl())
+                .setUrl(flaskApiProperties.getApiUrl())
                 .setMethod("POST")
                 .setBody(format(payload))
                 .setCharset(StandardCharsets.UTF_8)
