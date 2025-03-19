@@ -1,9 +1,9 @@
 <settings>
-  <servers>
-    <server>
-      <id>com.devzery</id>
-      <username>ranjansingh04</username>
-      <password>${env.GITHUB_TOKEN}</password>
-    </server>
-  </servers>
+	<servers>
+		<server>
+			<id>central</id>
+			<username>CSOq5byf</username>
+			<password>ev6OzXDSdbxlCrxh42uQHs+L34nWKBcKM1kjnHJuIasR</password>
+		</server>
+	</servers>
 </settings>
