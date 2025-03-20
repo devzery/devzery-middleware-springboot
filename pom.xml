@@ -48,6 +48,8 @@
 		<maven.compiler.target>8</maven.compiler.target>
 		<logbook.version>3.8.0</logbook.version>
 		<spring-boot.version>2.7.0</spring-boot.version>
+		<gpg.executable>gpg</gpg.executable>
+    	<gpg.passphrase>${env.GPG_PASSPHRASE}</gpg.passphrase>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -152,6 +154,11 @@
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<executable>${gpg.executable}</executable>
+					<passphrase>${gpg.passphrase}</passphrase>
+					<useAgent>true</useAgent>
+            	</configuration>
 			</plugin>
 		</plugins>
 	</build>

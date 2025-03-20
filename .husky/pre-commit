@@ -1,0 +1,10 @@
+#!/bin/sh
+# Prevent direct version changes in pom.xml
+
+if git diff --cached --name-only | grep -q "pom.xml"; then
+  if ! git diff --cached pom.xml | grep -q '<version>'; then
+    exit 0  # Allow commit if version is unchanged
+  fi
+  echo "❌ ERROR: Direct version updates in pom.xml are not allowed! It will be updated via github actions."
+  exit 1
+fi

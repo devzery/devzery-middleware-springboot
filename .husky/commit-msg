@@ -1,0 +1,9 @@
+#!/bin/sh
+# Enforce commit message format
+
+commit_msg=$(cat "$1")
+
+if ! echo "$commit_msg" | grep -E '^(major|minor|patch|fix|docs|refactor|no-release): ' > /dev/null; then
+  echo "❌ ERROR: Commit message must start with one of the following: major, minor, patch, fix, docs, refactor, no-release"
+  exit 1
+fi
