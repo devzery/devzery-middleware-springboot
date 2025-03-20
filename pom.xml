@@ -6,22 +6,50 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.devzery</groupId>
 	<artifactId>middleware</artifactId>
-	<version>${revision}-Javax</version>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
 	<name>Devzery-Middleware-Springboot</name>
 	<description>Spring Boot library for API monitoring</description>
 	<url>https://github.com/devzery/devzery-middleware-springboot</url>
-	<organization>
-		<name>Devzery</name>
-	</organization>
+	<licenses>
+		<license>
+			<name>Apache License 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+	<developers>
+		<developer>
+			<name>Ranjan Singh</name>
+			<email>ranjan.pratap@devzery.com</email>
+			<organization>Devzery</organization>
+			<organizationUrl>https://www.devzery.com/</organizationUrl>
+		</developer>
+	</developers>
+	<scm>
+		<connection>scm:git:git://github.com/devzery/devzery-middleware-springboot.git</connection>
+		<developerConnection>scm:git:ssh://github.com:devzery/devzery-middleware-springboot.git</developerConnection>
+		<url>https://github.com/devzery/devzery-middleware-springboot</url>
+	</scm>
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>17</java.version>
+		<java.version>8</java.version>
 		<maven.compiler.source>8</maven.compiler.source>
 		<maven.compiler.target>8</maven.compiler.target>
 		<logbook.version>3.8.0</logbook.version>
 		<spring-boot.version>2.7.0</spring-boot.version>
+		<gpg.executable>gpg</gpg.executable>
+    	<gpg.passphrase>${env.GPG_PASSPHRASE}</gpg.passphrase>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -47,38 +75,90 @@
 			<version>2.12.3</version>
 		</dependency>
 	</dependencies>
-	<distributionManagement>
-		<repository>
-			<id>com.devzery</id>
-			<name>middleware</name>
-			<url>https://maven.pkg.github.com/devzery/devzery-middleware-springboot</url>
-		</repository>
-	</distributionManagement>
 	<build>
 		<finalName>${project.artifactId}-${project.version}</finalName>
 		<plugins>
 			<!-- Versions Maven Plugin -->
-			<!-- https://mvnrepository.com/artifact/org.codehaus.mojo/versions-maven-plugin -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>versions-maven-plugin</artifactId>
 				<version>2.7</version>
 			</plugin>
-			<!-- Compiler -->
+			<!-- Compiler Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.13.0</version>
+				<version>3.8.1</version>
 				<configuration>
 					<source>${maven.compiler.source}</source>
 					<target>${maven.compiler.target}</target>
 				</configuration>
 			</plugin>
-			<!-- Jar -->
+			<!-- Jar Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.4.1</version>
+				<version>3.0.2</version>
+			</plugin>
+			<!-- Central Publishing Plugin -->
+			<plugin>
+				<groupId>org.sonatype.central</groupId>
+				<artifactId>central-publishing-maven-plugin</artifactId>
+				<version>0.7.0</version>
+				<extensions>true</extensions>
+				<configuration>
+					<publishingServerId>central</publishingServerId>
+					<autoPublish>true</autoPublish>
+					<waitUntil>published</waitUntil>
+				</configuration>
+			</plugin>
+			<!-- Javadoc Plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.5.0</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- Source Plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.2.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- GPG Signing Plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.6</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<executable>${gpg.executable}</executable>
+					<passphrase>${gpg.passphrase}</passphrase>
+					<useAgent>true</useAgent>
+            	</configuration>
 			</plugin>
 		</plugins>
 	</build>

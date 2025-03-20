@@ -4,10 +4,10 @@ This repository contains a Spring Boot library for API monitoring.
 
 ## Tech stack
 
-1. Java 17
+1. Java 8
 2. Spring Boot 2.7.0
 
-❗ **Compatible with Spring Boot version 2.x and Java 17**
+❗ **Compatible with Spring Boot version 2.x and 3.x and Java 8+**
 
 ## Building the Library
 
@@ -28,13 +28,13 @@ mvn clean deploy -Drevision='1.0.0' -f pom.xml
   To use the library in another Spring Boot project, follow these steps:
 
   1. Add the library as a dependency in your `pom.xml` file:
-     > 💡 **Note:** Copy this part by clicking on the `Packages` present on the right side pane.
+    > 💡 **Note:** The dependency can be found on Maven Central. Visit [Maven Central Repository](https://central.sonatype.com/artifact/com.devzery/middleware) to get the latest version and dependency snippet.
 
      ```xml
          <dependency>
-            <groupId>com.devzery</groupId>
-            <artifactId>middleware</artifactId>
-            <version>1.0.10-Javax</version>
+          <groupId>com.devzery</groupId>
+          <artifactId>middleware</artifactId>
+          <version>1.0.0</version>
         </dependency>
     
   3. Configure the library in your Spring Boot application:
@@ -53,38 +53,29 @@ mvn clean deploy -Drevision='1.0.0' -f pom.xml
 	        }
        }
 ---------------------------------------------------------------------------------------
-## Add dependency
-To point maven to the repo, we also have to specify the `repositoriy` in the `pom.xml`.
-```xml
-<repositories>
-    <repository>
-        <id>com.devzery</id>
-        <name>middleware</name>
-        <url>https://maven.pkg.github.com/devzery/devzery-middleware-springboot</url>
-        <releases><enabled>true</enabled></releases>
-        <snapshots><enabled>true</enabled></snapshots>
-    </repository>
-</repositories>
-```
-## Enable authentication
-The registry access is available through the GitHub api which is protected by an authorisation.
-So you have ro add the credentials to the Package Registry to your global `settings.xml`:  
-`Users\.m2\settings.xml`
+## Contributing Guidelines
 
-``` xml
-<settings>
-  <servers>
-    <server>
-      <id>com.devzery</id>
-      <username>YOUR_USERNAME</username>
-      <password>YOUR_AUTH_TOKEN</password>
-    </server>
-  </servers>
-</settings>
+> 💡 **Important Notes for Contributors:**
+
+### Version Management
+- Do not modify version numbers in `pom.xml`
+- Versioning is automatically handled by GitHub Actions
+
+### Commit Message Format
+Follow these conventions for commit messages:
+
+✅ **Acceptable Formats:**
 ```
-Replace the `YOUR_USERNAME` with your GitHub login name.  
-Replace the `YOUR_AUTH_TOKEN` with a generated GitHub personal access token:  
-_GitHub_ > _Settings_ > _Developer Settings_ > _Personal access tokens_ > _Generate new token_:   
-The token needs at least the `read:packages` scope.
-Otherwise you will get a `Not authorized` exception.
+patch: fix API response handling
+minor: add new feature
+```
+
+❌ **Unacceptable Formats:**
+```
+Updated code
+Bumped version in pom.xml
+```
+
+For detailed commit message rules, check `husky -> commit-msg` in the project.
+
 
